@@ -1,0 +1,33 @@
+.choice-card {
+  margin: 40px 0;
+  padding: 20px;
+  color: #97a75e;
+  font-size: 30px;
+  border-radius: 25px;
+  text-transform: uppercase;
+  background-color: #fefae0;
+  border: 5px dashed #ccd5ae;
+}
+.App{
+  text-align: center;
+}
+.red {
+  background-color: red;
+}
+
+.white {
+  background-color: white;
+}
+
+.blue {
+  background-color: blue;
+}
+.styleH1
+{
+  text-align: center;
+
+}
+.addingSomeSpace
+{
+  padding-right: 30rem;
+}
