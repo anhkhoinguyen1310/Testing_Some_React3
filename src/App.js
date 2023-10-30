@@ -1,5 +1,5 @@
 import {Navbar, Nav, NavDropdown, Button, Row, Col, Stack} from "react-bootstrap";
-import {useEffect, useState} from 'react'
+import {useEffect, useState, useCallback} from 'react'
 import './App.css';
 import rock from "./Images/rock.png";
 import paper from "./Images/paper.png";
@@ -54,54 +54,55 @@ function App() {
   const [outcome, setOutcome] = useState('Make A Choice!!!');
   
 
-  const calculateWinner = () => {
+  const calculateWinner = useCallback(() => {
     if (computerChoice === playerChoice) {
-      setOutcome('Tie');
-      setcomputerResult('tie');
-      setPlayerResult('tie');
-      setGameHistory([
-        ...gameHistory,
-        {
-          winner: 'Tie',
-          playerChoice: playerChoice,
-          computerChoice: computerChoice,
-        }
-      ])
-      return;
+        setOutcome('Tie');
+        setcomputerResult('tie');
+        setPlayerResult('tie');
+        setGameHistory(prevHistory => [
+            ...prevHistory,
+            {
+                winner: 'Tie',
+                playerChoice: playerChoice,
+                computerChoice: computerChoice,
+            }
+        ]);
+        return;
     }
-    
+
     const winningCombos = {
-      rock: 'scissors',
-      paper: 'rock',
-      scissors: 'paper'
+        rock: 'scissors',
+        paper: 'rock',
+        scissors: 'paper'
     };
-    
+
     if (winningCombos[computerChoice] === playerChoice) {
-      setOutcome('Computer Won');
-      setcomputerResult('Win');
-      setPlayerResult('Loss');
-      setGameHistory([
-        ...gameHistory,
-        {
-          winner: 'Computer Won',
-          playerChoice: playerChoice,
-          computerChoice: computerChoice,
-        }
-      ])
+        setOutcome('Computer Won');
+        setcomputerResult('Win');
+        setPlayerResult('Loss');
+        setGameHistory(prevHistory => [
+            ...prevHistory,
+            {
+                winner: 'Computer Won',
+                playerChoice: playerChoice,
+                computerChoice: computerChoice,
+            }
+        ]);
     } else {
-      setOutcome('Player Won');
-      setcomputerResult('Loss');
-      setPlayerResult('Win');
-      setGameHistory([
-        ...gameHistory,
-        {
-          winner: 'Player Won',
-          playerChoice: playerChoice,
-          computerChoice: computerChoice,
-        }
-      ])
+        setOutcome('Player Won');
+        setcomputerResult('Loss');
+        setPlayerResult('Win');
+        setGameHistory(prevHistory => [
+            ...prevHistory,
+            {
+                winner: 'Player Won',
+                playerChoice: playerChoice,
+                computerChoice: computerChoice,
+            }
+        ]);
     }
-  }
+}, [playerChoice, computerChoice]);
+
   
   const play = (choice) => {
     setPlayerChoice(choice);  
@@ -111,7 +112,7 @@ function App() {
 useEffect(() => { 
   calculateWinner(playerChoice, computerChoice);
 
-}, [playerChoice, playerChoice])
+}, [playerChoice, computerChoice, calculateWinner])
   return (
     <div className="App">
       <NavBarr/>
