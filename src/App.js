@@ -28,6 +28,7 @@ function NavBarr () {
   )
 }
 
+
 const ChoiceCard = (props) => {
   console.log("Props:", props);
   return (
@@ -50,8 +51,15 @@ function App() {
   const [computerResult, setcomputerResult] = useState(null);
   const [gameHistory, setGameHistory] = useState ([])
 
-
   const [outcome, setOutcome] = useState('Make A Choice!!!');
+  const restartGame = () => {
+    setPlayerChoice(null);
+    setPlayerResult(null);
+    setcomputerChoice(null);
+    setcomputerResult(null);
+    setGameHistory([]);
+    setOutcome('Make A Choice!!!');
+};
   
 
   const calculateWinner = useCallback(() => {
@@ -75,6 +83,7 @@ function App() {
         paper: 'rock',
         scissors: 'paper'
     };
+  
 
     if (winningCombos[computerChoice] === playerChoice) {
         setOutcome('Computer Won');
@@ -125,7 +134,11 @@ useEffect(() => {
         <Button onClick={() => play('rock') }>Rock</Button>
         <Button onClick={() => play('paper') }>Paper</Button>
         <Button onClick={() => play('scissors') }>Scissor</Button>
+        
         </Stack>
+        <Row className="mt-3">
+            <Col md={{ span: 3, offset: 3}}><Button className="mx-auto" onClick={restartGame }>Restart</Button></Col>
+        </Row>
         </Col>
         <Col> <ChoiceCard title="Computer" winner={computerResult} shape={computerChoice} /></Col>
        </Row>
