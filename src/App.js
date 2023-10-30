@@ -142,15 +142,15 @@ useEffect(() => {
         </Col>
         <Col> <ChoiceCard title="Computer" winner={computerResult} shape={computerChoice} /></Col>
        </Row>
-<ul>
-  {gameHistory.map((g,i)=>{
-    return <li key={i}>
-      Game Number: {i+1} winner: {g.winner}, playerChoice: {g.playerChoice}, computerChoice: {g.computerChoice}
-    </li>
-  })}
-</ul>
 
       </div>
+      <ul>
+  {gameHistory.map((g,i)=>{
+    return < div key={i}>
+      Game Number: {i+1} winner: {g.winner}, playerChoice: {g.playerChoice}, computerChoice: {g.computerChoice}
+    </div>
+  })}
+</ul>
     </div >
   );
 
